@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Ruby N' Stuff</title>
+<title>G!bb580x</title>
 <link rel="stylesheet" type="text/css" href="button.css">
 <script src ="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script>
+    var filelength = 0;
     $(function() {
         $("#room").load(function(){ $("#room").contents().find("head").append($('<link rel="stylesheet" type="text/css" href="button.css">'));});
         update();
     });
-    function update() {        
-        $("#room").attr('src', $("#room").attr('src'));
-        window.setTimeout(scroll, 50);
+    function update() {
+        $.get("log", function(data) {
+            if (parseInt(data) != filelength) {
+                $("#room").attr('src', $("#room").attr('src'));
+                filelength = parseInt(data);
+                window.setTimeout(scroll, 50);
+            } else {
+                window.setTimeout(update, 2000);
+            }
+        });
+        
     }
     function scroll(){
-        window.setTimeout(update, 3000);
+        window.setTimeout(update, 2000);
         $("#room").height($("#room").contents().find("pre").height() + 15);
         $("#room").contents().scrollTop($("#room").contents().height());
     }
@@ -24,8 +33,8 @@
 <input type="button" class="btn" onclick="location.href='/'" value="Refresh">
 <iframe seamless="true" scrolling="no" src="log.txt" id="room" name="room"></iframe>
 <form action="actions/blah" method="post">
-<input name="message" style="float:right" autocomplete="off"/>
-<input style="display:none" type="submit" tabindex="1"/>
+<input name="message" style="float:right" autocomplete="off" autofocus="true"/>
+<input style="display:none" type="submit"/>
 </form>
 </body>
 <html>
