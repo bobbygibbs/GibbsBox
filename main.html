@@ -12,7 +12,7 @@
     });
     function update() {
         $.get("log", function(data) {
-            if (parseInt(data) != filelength) {
+            if (parseInt(data) != filelength || ($("#room").contents().height() > $("#room").height() && $("#room").contents().scrollTop() == 0)) {
                 $("#room").attr('src', $("#room").attr('src'));
                 filelength = parseInt(data);
                 window.setTimeout(scroll, 50);
