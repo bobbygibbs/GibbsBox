@@ -1,6 +1,8 @@
 input.btn {
     display:block;
     padding:10px;
+	margin:5px;
+	float:left;
     border-color:lime;
 }
 input {
